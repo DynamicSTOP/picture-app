@@ -25,19 +25,14 @@
     ],
     "incremental": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "isolatedModules": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts",
     "electron/**/*.ts",
-    "electron/main.ts",
-    "electron/db.ts",
-    "electron/preload.ts"
+    "domain/**/*.ts"
   ],
   "exclude": [
+    "./dist/tsconfig.tsc.tsbuildinfo",
     "node_modules"
   ]
 }

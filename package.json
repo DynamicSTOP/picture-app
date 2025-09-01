@@ -2,26 +2,45 @@
   "name": "picture-app",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/main",
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"npm run tsc:watch\" \"npm run electron\"",
+    "dev:electron": "concurrently \"npm run tsc:watch\" \"npm run electron\"",
+    "dev:electronmon": "concurrently \"npm run tsc:watch\" \"npm run electronmon\"",
+    
+    "electronmon": "ELECTRON_DISABLE_SANDBOX=1 electronmon dist/main.js",
+    "next": "next dev --turbopack",
+    "electron": "npm run tsc && ELECTRON_DISABLE_SANDBOX=1 electron dist/main.js",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w -p tsconfig.tsc.json"
   },
   "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "concurrently": "^9.2.1",
+    "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.2"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/electron": "^1.6.12",
+    "@types/node": "^20.19.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "electron": "^37.4.0",
+    "electron-rebuild": "^3.2.9",
+    "electronmon": "^2.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "wait-on": "^8.0.4"
   }
 }
