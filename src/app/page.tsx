@@ -1,54 +1,44 @@
-"use client"
-import React from 'react';
-import { useEffect, useState } from 'react';
-
-interface Note { id: string, content: string }
-
-declare global {
-  interface Window {
-    db: {
-      insertNote: (text: string) => Promise<void>,
-      getNotes: () => Promise<Note[]>
-    }
-  }
-}
 
 export default function Home() {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [input, setInput] = useState('');
-
-  const loadNotes = async () => {
-    const data = await window.db.getNotes();
-    setNotes(data);
-  };
-
-  const handleAdd = async () => {
-    if (!input.trim()) return;
-    await window.db.insertNote(input);
-    setInput('');
-    loadNotes();
-  };
-
-  useEffect(() => {
-    loadNotes();
-  }, []);
-
-  return (
-    <main style={{ padding: 20 }}>
-      <h1>SQLite Notes</h1>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Write a note"
-        style={{ padding: 8, marginRight: 8 }}
-      />
-      <button className='thick' onClick={handleAdd}>Add</button>
-
-      <ul>
-        {notes.map((note) => (
-          <li key={note.id}>{note.content}</li>
-        ))}
-      </ul>
+  return <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+    <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+        <li>
+          <a
+            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            href="/settings"
+          >
+            settings
+          </a>
+        </li>
+      </ol>
     </main>
-  );
+
+    <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      <a
+        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+        href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn
+      </a>
+      <a
+        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+        href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Examples
+      </a>
+      <a
+        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+        href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Go to nextjs.org →
+      </a>
+    </footer>
+  </div>;
 }

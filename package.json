@@ -5,10 +5,9 @@
   "main": "dist/main",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run tsc:watch\" \"npm run electron\"",
-    "dev:electron": "concurrently \"npm run tsc:watch\" \"npm run electron\"",
-    "dev:electronmon": "concurrently \"npm run tsc:watch\" \"npm run electronmon\"",
-    
+    "dev": "DEV_ENV=1 concurrently \"npm run tsc:watch\" \"npm run electron\"",
+    "dev:electron": "DEV_ENV=1 concurrently \"npm run tsc:watch\" \"npm run electron\"",
+    "dev:electronmon": "DEV_ENV=1 concurrently \"npm run tsc:watch\" \"npm run electronmon\"",
     "electronmon": "ELECTRON_DISABLE_SANDBOX=1 electronmon dist/main.js",
     "next": "next dev --turbopack",
     "electron": "npm run tsc && ELECTRON_DISABLE_SANDBOX=1 electron dist/main.js",
@@ -21,6 +20,7 @@
   "dependencies": {
     "better-sqlite3": "^12.2.0",
     "concurrently": "^9.2.1",
+    "express": "^5.1.0",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -30,6 +30,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/better-sqlite3": "^7.6.13",
     "@types/electron": "^1.6.12",
+    "@types/express": "^5.0.3",
     "@types/node": "^20.19.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
